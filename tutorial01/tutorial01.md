@@ -198,9 +198,9 @@ lept_type lept_get_type(const lept_value* v);
 下面是此单元的 JSON 语法子集，使用 [RFC7159](https://tools.ietf.org/html/rfc7159) 中的 [ABNF](https://tools.ietf.org/html/rfc5234) 表示：
 
 ~~~
-JSON-text = ws value ws
-ws = *(%x20 / %x09 / %x0A / %x0D)
-value = null / false / true 
+JSON-text = whitespace value whitespace
+whitespace = *(%x20 / %x09 / %x0A / %x0D)
+value = null / false / true
 null  = "null"
 false = "false"
 true  = "true"
@@ -357,8 +357,8 @@ typedef struct {
 
 /* ... */
 
-/* 提示：这里应该是 JSON-text = ws value ws */
-/* 以下实现没处理最后的 ws 和 LEPT_PARSE_ROOT_NOT_SINGULAR */
+/* 提示：这里应该是 JSON-text = whitespace value whitespace */
+/* 以下实现没处理最后的 whitespace 和 LEPT_PARSE_ROOT_NOT_SINGULAR */
 int lept_parse(lept_value* v, const char* json) {
     lept_context c;
     assert(v != NULL);
@@ -388,7 +388,7 @@ leptjson 是一个手写的递归下降解析器（recursive descent parser）�
 ~~~c
 #define EXPECT(c, ch) do { assert(*c->json == (ch)); c->json++; } while(0)
 
-/* ws = *(%x20 / %x09 / %x0A / %x0D) */
+/* whitespace = *(%x20 / %x09 / %x0A / %x0D) */
 static void lept_parse_whitespace(lept_context* c) {
     const char *p = c->json;
     while (*p == ' ' || *p == '\t' || *p == '\n' || *p == '\r')

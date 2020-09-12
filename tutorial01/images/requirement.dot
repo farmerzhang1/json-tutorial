@@ -7,7 +7,7 @@ digraph {
     ranksep=0.5
     nodesep=1
     penwidth=0.5
-    
+
     node [shape=box, fontname="Inconsolata, Consolas", fontsize=10, penwidth=0.5, style=filled, colorscheme=spectral7]
     edge [fontname="Inconsolata, Consolas", fontsize=10, penwidth=0.5]
 
